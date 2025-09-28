@@ -16,7 +16,7 @@ local Notif = library:InitNotifications()
 
 for i = 20,0,-1 do 
     task.wait(0.05)
-    local LoadingXSX = Notif:Notify("Loading xsx lib v2, please be patient.", 3, "information") -- notification, alert, error, success, information
+    local LoadingXSX = Notif:Notify("Loading library, please be patient. <3", 3, "information") -- notification, alert, error, success, information
 end 
 
 library.title = "Vigil"
