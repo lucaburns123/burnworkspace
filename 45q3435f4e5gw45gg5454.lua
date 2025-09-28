@@ -1,8 +1,10 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lucaburns123/burnworkspace/refs/heads/main/xsxlib"))()
 
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
+
 
 library.rank = "developer"
-local Wm = library:Watermark("burnscript!"   " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+local Wm = library:Watermark("xsx example | v" .. library.version ..  " | " .. library:GetUsername() .. " | rank: " .. library.rank)
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
 coroutine.wrap(function()
     while wait(.75) do
@@ -15,19 +17,18 @@ local Notif = library:InitNotifications()
 
 for i = 20,0,-1 do 
     task.wait(0.05)
-    local LoadingXSX = Notif:Notify("loading library, please be patient.", 3, "information") -- notification, alert, error, success, information
+    local LoadingXSX = Notif:Notify("Loading xsx lib v2, please be patient.", 3, "information") -- notification, alert, error, success, information
 end 
 
-library.title = "burn.script"
+library.title = "Vigil"
 
 library:Introduction()
 wait(1)
 local Init = library:Init()
 
-local Tab1 = Init:NewTab("layout")
+local Tab1 = Init:NewTab("Example tab")
 
-local Section1 = Tab1:NewSection("lay-out")
-local Section2 = Tab1:NewSection("player")
+local Section1 = Tab1:NewSection("Example Components")
 
 
 local Label1 = Tab1:NewLabel("Example label", "left")--"left", "center", "right"
@@ -85,6 +86,7 @@ end)
 
 local FinishedLoading = Notif:Notify("Loaded xsx example", 4, "success")
 
+library:PromptDiscord("invite")
 -- // FUNCTION DOCS: 
 --[[
     MAIN COMPONENT DOCS:
