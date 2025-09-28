@@ -1,4 +1,4 @@
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lucaburns123/burnworkspace/refs/heads/main/xsxlib.lua"))()
+local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lucaburns123/burnworkspace/refs/heads/main/xsxlib"))()
 
 
 library.rank = "developer"
