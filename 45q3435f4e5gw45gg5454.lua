@@ -1,10 +1,9 @@
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/lucaburns123/burnworkspace/refs/heads/main/xsxlib"))()
 
-local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Consistt/Ui/main/UnLeaked"))()
 
 
 library.rank = "developer"
-local Wm = library:Watermark("xsx example | v" .. library.version ..  " | " .. library:GetUsername() .. " | rank: " .. library.rank)
+local Wm = library:Watermark("burnscript!" ..  " | " .. library:GetUsername() .. " | rank: " .. library.rank)
 local FpsWm = Wm:AddWatermark("fps: " .. library.fps)
 coroutine.wrap(function()
     while wait(.75) do
