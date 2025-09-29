@@ -109,6 +109,22 @@ local Section1misc = Tab1:AddSection("teleports", 3)
 local Section2misc = Tab1:AddSection("attributes", 4)
 
 
+Section4:AddSlider({
+    enabled = true,
+    text = " player walkspeed",
+    tooltip = "tooltip1",
+    flag = "Slider_1",
+    suffix = "",
+    dragging = true,
+    focused = false,
+    min = 0,
+    max = 100,
+    increment = 0.1,
+    risky = false,
+    callback = function(v)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
+    end
+})
 
 
 Section1:AddList({
