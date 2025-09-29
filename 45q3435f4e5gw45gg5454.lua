@@ -410,7 +410,7 @@ Section3misc:AddButton({
     confirm = true,
     risky = false,
     callback = function()
-        game.Players.LocalPlayer.PlayerGui.GUI.SpookMcDookShop.Visible = true;
+       game.Players.LocalPlayer.PlayerGui.GUI.Patrick.Visible = true;
     end
 })
 
