@@ -105,18 +105,60 @@ local Section2 = Tab1:AddSection("helpers", 2)
 
 
 
-
--- Dropdown for Layout Switch Threshold
-SettingsTab:AddDropdown({
-    Name = "Select Layout Switch (What cash value to switch)",
-    Options = thresholdOptions,
-    Default = "1K (Thousand)",
-    Callback = function(selected)
-        layoutSwitchThreshold = thresholdValues[selected] or 1e3
+Section1:AddList({
+    enabled = true,
+    text = "auto switch value minimum", 
+    tooltip = "select layout switch minimum (cash value to auto-switch)",
+    selected = "",
+    multi = false,
+    open = false,
+    max = 18,
+    values = thresholdOptions,
+    risky = false,
+    callback = function(v)
+        layoutSwitchThreshold = thresholdValues[v] or 1e3
     end
 })
 
+Section1:AddToggle({
+    text = "auto layout switch (1-2)",
+    state = false,
+    risky = true,
+    tooltip = "auto opens regular boxes!",
+    flag = "Toggle_1",
+    risky = false,
+    callback = function(v)
+        autoLayoutSwitch12 = v
+        if v then
+            layoutSwitchLoop12()
+        end
+    end
+})
 
+Section1:AddToggle({
+    text = "auto layout switch (1-3)",
+    state = false,
+    risky = true,
+    tooltip = "auto opens regular boxes!",
+    flag = "Toggle_1",
+    risky = false,
+    callback = function(v)
+        autoLayoutSwitch13 = v
+        if v then
+            layoutSwitchLoop13()
+        end
+    end
+})
+
+-- Layout Toggles
+local function startLayoutLoop(layoutName, runningVariable)
+    spawn(function()
+        while _G[runningVariable] do
+            game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
+            wait(0.001)
+        end
+    end)
+end
 
 Section1:AddButton({
     enabled = true,
@@ -278,15 +320,6 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
 ]]
 
 -- Teleport Loop Function
--- Layout Toggles
-function startLayoutLoop(layoutName, runningVariable)
-    spawn(function()
-        while _G[runningVariable] do
-            game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
-            wait(0.001)
-        end
-    end)
-end
 
 function teleportLoop()
     local player = game.Players.LocalPlayer
