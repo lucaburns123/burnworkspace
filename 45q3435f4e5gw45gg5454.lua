@@ -360,7 +360,7 @@ Section1misc:AddButton({
 
 Section2misc:AddSlider({
     enabled = true,
-    text = " player walk speed",
+    text = "player walk speed",
     tooltip = "attempts to modify the walk speed",
     flag = "Slider_1",
     suffix = "",
@@ -377,7 +377,7 @@ Section2misc:AddSlider({
 
 Section2misc:AddSlider({
     enabled = true,
-    text = " player jump power",
+    text = "player jump power",
     tooltip = "attempts to modify the jump power",
     flag = "Slider_1",
     suffix = "",
