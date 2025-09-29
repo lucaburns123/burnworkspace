@@ -19,31 +19,51 @@ local SettingsTab = library:CreateSettingsTab(Window1)
 
 --Tab1:SetText("Text")
 
-local Section1 = Tab1:AddSection("layout switch", 1)
+local Section1 = Tab1:AddSection("layout-helpers", 1)
+
 --Section1:SetText("Text")
 
 Section1:AddButton({
     enabled = true,
-    text = "box teleportation",
+    text = "layout-1",
+    tooltip = "tooltip1",
+    confirm = true,
+    risky = false,
+    callback = function(=)
+            startLayoutLoop("Layout1", "runningLayout1")
+    end
+})
+
+Section1:AddButton({
+    enabled = true,
+    text = "layout-2",
     tooltip = "tooltip1",
     confirm = true,
     risky = false,
     callback = function(state)
-        autoTeleport = state -- Update toggle state
+        _G.runningLayout2 = state
+        if state then
+            startLayoutLoop("Layout2", "runningLayout2")
+        end
+    end
+})
 
-        local player = game.Players.LocalPlayer
-        local character = player.Character
-
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            if state then
-                teleportLoop()
-            end
+Section1:AddButton({
+    enabled = true,
+    text = "layout-3",
+    tooltip = "tooltip1",
+    confirm = true,
+    risky = false,
+    callback = function(state)
+        _G.runningLayout1 = state
+        if state then
+            startLayoutLoop("Layout1", "runningLayout1")
         end
     end
 })
 
 Section1:AddToggle({
-    text = "Toggle1",
+    text = "box teleportation",
     state = false,
     risky = true,
     tooltip = "tooltip1",
@@ -224,6 +244,17 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
     library:LoadConfig(Default)
     library:SaveConfig(Default)
 ]]
+-- DEFINITIONS
+
+-- Layout Toggles
+local function startLayoutLoop(layoutName, runningVariable)
+    spawn(function()
+        while _G[runningVariable] do
+            game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
+            wait(0.001)
+        end
+    end)
+end
 
 -- Teleport Loop Function
 function teleportLoop()
