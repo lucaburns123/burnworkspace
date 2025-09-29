@@ -3,24 +3,46 @@ local Clock = os.clock()
 local ValueText = "Value Is Now :"
 
 local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/drillygzzly/Roblox-UI-Libs/main/1%20Tokyo%20Lib%20(FIXED)/Tokyo%20Lib%20Source.lua"))({
-    cheatname = "Title Here", -- watermark text
-    gamename = "Title Here", -- watermark text
+    cheatname = "burnscript!", -- watermark text
+    gamename = "miners haven", -- watermark text
 })
 
 library:init()
 
 local Window1  = library.NewWindow({
-    title = "Title Here | Title Here", -- Mainwindow Text
+    title = "burn.script! | miners haven", -- Mainwindow Text
     size = UDim2.new(0, 510, 0.6, 6
 )})
 
-local Tab1 = Window1:AddTab("  Tab1  ")
+local Tab1 = Window1:AddTab("  layout  ")
 local SettingsTab = library:CreateSettingsTab(Window1)
 
 --Tab1:SetText("Text")
 
-local Section1 = Tab1:AddSection("Section 1", 1)
+local Section1 = Tab1:AddSection("layout switch", 1)
 --Section1:SetText("Text")
+
+Section1:AddButton({
+    enabled = true,
+    text = "box teleportation",
+    tooltip = "tooltip1",
+    confirm = true,
+    risky = false,
+    callback = function(state)
+        autoTeleport = state -- Update toggle state
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if state then
+                teleportLoop()
+            end
+        end
+    end
+})
+
+
 
 Section1:AddToggle({
     text = "Toggle1",
@@ -174,3 +196,41 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
     library:LoadConfig(Default)
     library:SaveConfig(Default)
 ]]
+
+-- Teleport Loop Function
+function teleportLoop()
+    local player = game.Players.LocalPlayer
+    local character = player.Character
+
+    if character and character:FindFirstChild("HumanoidRootPart") then
+        local humanoidRootPart = character.HumanoidRootPart
+        local originalPosition = humanoidRootPart.CFrame -- Store original position
+
+        while autoTeleport do -- Only run if the toggle is ON
+            task.wait(0.001) -- Fast teleporting
+
+            local boxesFolder = game.Workspace:FindFirstChild("Boxes") -- Locate the boxes
+            local hasBoxes = false -- Flag to check if any boxes exist
+
+            if boxesFolder and #boxesFolder:GetChildren() > 0 then
+                for _, box in pairs(boxesFolder:GetChildren()) do
+                    if not autoTeleport then return end -- Stop if toggle is turned off
+                    if box:IsA("Part") or box:IsA("MeshPart") then
+                        hasBoxes = true -- At least one box exists
+                        -- Move the player directly onto the box (touching it)
+                        humanoidRootPart.CFrame = box.CFrame + Vector3.new(0, humanoidRootPart.Size.Y / 2, 0)
+                        task.wait(0.05) -- Small delay to ensure touch
+                    end
+                end
+            end
+
+            -- If no boxes are found, loop teleport to the original position
+            if not hasBoxes then
+                while autoTeleport and (not boxesFolder or #boxesFolder:GetChildren() == 0) do
+                    humanoidRootPart.CFrame = originalPosition -- Continuously teleport to the original position
+                    task.wait(0.1) -- Prevents excessive looping
+                end
+            end
+        end
+    end
+end
