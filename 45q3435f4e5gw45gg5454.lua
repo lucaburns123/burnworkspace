@@ -7,6 +7,86 @@ local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/drill
     gamename = "miners haven", -- watermark text
 })
 
+-- Function to load a layout (prevents unnecessary reloads)
+local function loadLayout(layoutName)
+    if lastLoadedLayout ~= layoutName then
+        game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
+        lastLoadedLayout = layoutName
+    end
+end
+
+-- definitions!
+
+-- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 2 Once)
+local function layoutSwitchLoop12()
+    spawn(function()
+        local loadedLayout2 = false
+        while autoLayoutSwitch12 do
+            local moneyValue = game:GetService("Players").LocalPlayer.PlayerGui.GUI.Money.Value
+            if moneyValue >= layoutSwitchThreshold then
+                if not loadedLayout2 then
+                    game:GetService("ReplicatedStorage").DestroyAll:InvokeServer()
+                    game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", "Layout2")
+                    loadedLayout2 = true
+                end
+            else
+                game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", "Layout1")
+                loadedLayout2 = false
+            end
+            wait(0.001)
+        end
+    end)
+end
+
+-- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 3 Once)
+local function layoutSwitchLoop13()
+    spawn(function()
+        local loadedLayout3 = false
+        while autoLayoutSwitch13 do
+            local moneyValue = game:GetService("Players").LocalPlayer.PlayerGui.GUI.Money.Value
+            if moneyValue >= layoutSwitchThreshold then
+                if not loadedLayout3 then
+                    game:GetService("ReplicatedStorage").DestroyAll:InvokeServer()
+                    game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", "Layout3")
+                    loadedLayout3 = true
+                end
+            else
+                game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", "Layout1")
+                loadedLayout3 = false
+            end
+            wait(0.001)
+        end
+    end)
+end
+
+-- Dropdown for Auto Layout Switch Threshold
+local thresholdOptions = {
+    "1K (Thousand)", "1M (Million)", "1B (Billion)", "1T (Trillion)", "1qd (Quadrillion)", "1Qn (Quintillion)",
+    "1sx (Sextillion)", "1Sp (Septillion)", "1O (Octillion)", "1N (Nonillion)", "1de (Decillion)", "1Ud (Undecillion)",
+    "1DD (Duodecillion)", "1tdD (Tredecillion)", "1qdD (Quattuordecillion)", "1QnD (Quindecillion)", "1sxD (Sedecillion)", "1SpD (Septendecillion)"
+}
+
+local thresholdValues = {
+    ["1K (Thousand)"] = 1e3,
+    ["1M (Million)"] = 1e6,
+    ["1B (Billion)"] = 1e9,
+    ["1T (Trillion)"] = 1e12,
+    ["1qd (Quadrillion)"] = 1e15,
+    ["1Qn (Quintillion)"] = 1e18,
+    ["1sx (Sextillion)"] = 1e21,
+    ["1Sp (Septillion)"] = 1e24,
+    ["1O (Octillion)"] = 1e27,
+    ["1N (Nonillion)"] = 1e30,
+    ["1de (Decillion)"] = 1e33,
+    ["1Ud (Undecillion)"] = 1e36,
+    ["1DD (Duodecillion)"] = 1e39,
+    ["1tdD (Tredecillion)"] = 1e42,
+    ["1qdD (Quattuordecillion)"] = 1e45,
+    ["1QnD (Quindecillion)"] = 1e48,
+    ["1sxD (Sedecillion)"] = 1e51,
+    ["1SpD (Septendecillion)"] = 1e54,
+}
+
 library:init()
 
 local Window1  = library.NewWindow({
@@ -26,9 +106,15 @@ local Section2 = Tab1:AddSection("helpers", 2)
 
 
 
-
-
-
+-- Dropdown for Layout Switch Threshold
+SettingsTab:AddDropdown({
+    Name = "Select Layout Switch (What cash value to switch)",
+    Options = thresholdOptions,
+    Default = "1K (Thousand)",
+    Callback = function(selected)
+        layoutSwitchThreshold = thresholdValues[selected] or 1e3
+    end
+})
 
 
 
@@ -36,6 +122,28 @@ Section1:AddButton({
     enabled = true,
     text = "layout 1",
     tooltip = "forcibly switches your layout to layout 1",
+    confirm = true,
+    risky = false,
+    callback = function()
+        startLayoutLoop("Layout1", "runningLayout1")
+    end
+})
+
+Section1:AddButton({
+    enabled = true,
+    text = "layout 2",
+    tooltip = "forcibly switches your layout to layout 2",
+    confirm = true,
+    risky = false,
+    callback = function()
+        startLayoutLoop("Layout1", "runningLayout1")
+    end
+})
+
+Section1:AddButton({
+    enabled = true,
+    text = "layout 3",
+    tooltip = "forcibly switches your layout to layout 3",
     confirm = true,
     risky = false,
     callback = function()
