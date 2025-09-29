@@ -104,26 +104,6 @@ local Section1 = Tab1:AddSection("layout switch", 1)
 
 local Section2 = Tab1:AddSection("helpers", 2)
 
-local Section1misc = Tab2:AddSection("teleports", 1)
-local Section2misc = Tab2:AddSection("attributes", 2)
-
-
-Section2misc:AddSlider({
-    enabled = true,
-    text = " player walkspeed",
-    tooltip = "tooltip1",
-    flag = "Slider_1",
-    suffix = "",
-    dragging = true,
-    focused = false,
-    min = 0,
-    max = 100,
-    increment = 0.1,
-    risky = false,
-    callback = function(v)
-            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
-    end
-})
 
 
 Section1:AddList({
@@ -325,6 +305,31 @@ Section2:AddToggle({
                 teleportLoop()
             end
         end
+    end
+})
+
+
+
+local Section1misc = Tab2:AddSection("teleports", 1)
+local Section2misc = Tab2:AddSection("attributes", 2)
+
+
+
+
+Section2misc:AddSlider({
+    enabled = true,
+    text = " player walkspeed",
+    tooltip = "tooltip1",
+    flag = "Slider_1",
+    suffix = "",
+    dragging = true,
+    focused = false,
+    min = 0,
+    max = 100,
+    increment = 0.1,
+    risky = false,
+    callback = function(v)
+            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
     end
 })
 
