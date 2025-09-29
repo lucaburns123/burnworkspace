@@ -34,8 +34,8 @@ local Section2 = Tab1:AddSection("helpers", 2)
 
 Section1:AddButton({
     enabled = true,
-    text = "Button1",
-    tooltip = "tooltip1",
+    text = "layout 1",
+    tooltip = "forcibly switches your layout to layout 1",
     confirm = true,
     risky = false,
     callback = function()
@@ -43,7 +43,12 @@ Section1:AddButton({
     end
 })
 
-
+Callback = function(state)
+        _G.runningLayout1 = state
+        if state then
+            startLayoutLoop("Layout1", "runningLayout1")
+        end
+    end
 
 
 Section2:AddToggle({
@@ -170,6 +175,16 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
 ]]
 
 -- Teleport Loop Function
+-- Layout Toggles
+function startLayoutLoop(layoutName, runningVariable)
+    spawn(function()
+        while _G[runningVariable] do
+            game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
+            wait(0.001)
+        end
+    end)
+end
+
 function teleportLoop()
     local player = game.Players.LocalPlayer
     local character = player.Character
