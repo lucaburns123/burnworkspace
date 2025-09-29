@@ -50,7 +50,7 @@ Section2:AddToggle({
     text = "auto regular boxes",
     state = false,
     risky = true,
-    tooltip = "tooltip1",
+    tooltip = "auto opens regular boxes!",
     flag = "Toggle_1",
     risky = false,
     callback = function(v)
@@ -68,7 +68,7 @@ Section2:AddToggle({
     text = "auto unreal boxes",
     state = false,
     risky = true,
-    tooltip = "tooltip2",
+    tooltip = "auto opens unreal boxes!",
     flag = "Toggle_2",
     risky = false,
     callback = function(v)
@@ -86,7 +86,7 @@ Section2:AddToggle({
     text = "auto inferno boxes",
     state = false,
     risky = true,
-    tooltip = "tooltip3",
+    tooltip = "auto opens inferno boxes!",
     flag = "Toggle_3",
     risky = false,
     callback = function(v)
@@ -104,7 +104,7 @@ Section2:AddToggle({
     text = "auto pulse",
     state = false,
     risky = true,
-    tooltip = "tooltip4",
+    tooltip = "auto pulses ores! (works best with stardust pulsar's.)",
     flag = "Toggle_4",
     risky = false,
     callback = function(v)
@@ -122,7 +122,7 @@ Section2:AddToggle({
     text = "auto rebirth",
     state = false,
     risky = true,
-    tooltip = "tooltip5",
+    tooltip = "auto-rebirth's based on $ requirement's",
     flag = "Toggle_5",
     risky = false,
     callback = function(v)
@@ -140,7 +140,7 @@ Section2:AddToggle({
     text = "box teleportation",
     state = false,
     risky = true,
-    tooltip = "tooltip6",
+    tooltip = "teleports to every box spawned currently",
     flag = "Toggle_6",
     risky = false,
     callback = function(v)
