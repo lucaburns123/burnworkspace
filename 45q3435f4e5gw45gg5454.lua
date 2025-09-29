@@ -29,7 +29,7 @@ Section1:AddButton({
     tooltip = "tooltip1",
     confirm = true,
     risky = false,
-    callback = function(=)
+    callback = function()
             startLayoutLoop("Layout1", "runningLayout1")
     end
 })
