@@ -23,16 +23,6 @@ local Section1 = Tab1:AddSection("layout-helpers", 1)
 
 --Section1:SetText("Text")
 
-Section1:AddButton({
-    enabled = true,
-    text = "layout-1",
-    tooltip = "tooltip1",
-    confirm = true,
-    risky = false,
-    callback = function()
-            startLayoutLoop("Layout1", "runningLayout1")
-    end
-})
 
 
 Section1:AddToggle({
