@@ -20,117 +20,17 @@ local SettingsTab = library:CreateSettingsTab(Window1)
 --Tab1:SetText("Text")
 
 local Section1 = Tab1:AddSection("layout switch", 1)
---Section1:SetText("Text")
 
-Section1:AddToggle({
-    text = "box teleportation",
-    state = false,
-    risky = true,
-    tooltip = "tooltip1",
-    flag = "Toggle_1",
-    risky = false,
-    callback = function(v)
-        autoTeleport = v -- Update toggle state
+local Section2 = Tab1:AddSection("helpers", 2)
 
-        local player = game.Players.LocalPlayer
-        local character = player.Character
 
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            if v then
-                teleportLoop()
-            end
-        end
-    end
-})
 
-Section1:AddToggle({
-    text = "manual box teleportation",
-    state = false,
-    risky = true,
-    tooltip = "tooltip1",
-    flag = "Toggle_1",
-    risky = false,
-    callback = function(v)
-        print(ValueText, v)
-    end
-}):AddBind({
-    enabled = true,
-    text = "Keybind1",
-    tooltip = "tooltip1",
-    mode = "toggle",
-    bind = "None",
-    flag = "ToggleKey_1",
-    state = false,
-    nomouse = false,
-    risky = false,
-    noindicator = false,
-    callback = function(v)
-        print(ValueText, v)
-    end,
-    keycallback = function(v)
-        autoTeleport = v -- Update toggle state
 
-        local player = game.Players.LocalPlayer
-        local character = player.Character
 
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            if v then
-                teleportLoop()
-            end
-        end
-    end
-})
 
-Section1:AddBox({
-    enabled = true,
-    name = "TextBox1",
-    flag = "TextBox_1",
-    input = "PlaceHolder1",
-    focused = false,
-    risky = false,
-    callback = function(v)
-        print(ValueText, v)
-    end
-})
 
---[[Section1:AddToggle({
-    text = "Toggle1",
-    flag = "Toggle_1",
-    callback = function(v)
-        print(ValueText, v)
-    end
-}):AddColor({
-    text = "Color1",
-    color = Color3.fromRGB(255, 255, 255),
-    flag = "Color_1",
-    callback = function(v)
-        print(ValueText, v)
-    end
-})--]]
 
---[[Section1:AddBind({
-    enabled = true,
-    text = "Keybind1",
-    tooltip = "tooltip1",
-    mode = "toggle",
-    bind = "None",
-    flag = "ToggleKey_1",
-    state = false,
-    nomouse = false,
-    risky = false,
-    noindicator = false,
-    callback = function(v)
-        print(ValueText, v)
-    end,
-    keycallback = function(v)
-        print(ValueText, v)
-    end
-})--]]
 
-Section1:AddSeparator({
-    enabled = true,
-    text = "Separator1"
-})
 
 Section1:AddButton({
     enabled = true,
@@ -143,53 +43,117 @@ Section1:AddButton({
     end
 })
 
--- Button1:SetText("Text")
 
-Section1:AddSlider({
-    enabled = true,
-    text = "Slider1",
+
+
+Section2:AddToggle({
+    text = "auto regular boxes",
+    state = false,
+    risky = true,
     tooltip = "tooltip1",
-    flag = "Slider_1",
-    suffix = "",
-    dragging = true,
-    focused = false,
-    min = 0,
-    max = 100,
-    increment = 0.1,
+    flag = "Toggle_1",
     risky = false,
     callback = function(v)
-        print(ValueText, v)
+       autoRegularBox = v
+        spawn(function()
+            while autoRegularBox do
+                game:GetService("ReplicatedStorage").MysteryBox:InvokeServer("Regular")
+                wait(0.001)
+            end
+        end)
     end
 })
 
---Slider_1:SetValue(100)
-
-Section1:AddList({
-    enabled = true,
-    text = "Selection", 
-    tooltip = "tooltip1",
-    selected = "",
-    multi = false,
-    open = false,
-    max = 4,
-    values = {"1", "2", "3"},
+Section2:AddToggle({
+    text = "auto unreal boxes",
+    state = false,
+    risky = true,
+    tooltip = "tooltip2",
+    flag = "Toggle_2",
     risky = false,
     callback = function(v)
-        print(ValueText, v)
+       autoUnrealBox = v
+        spawn(function()
+            while autoUnrealBox do
+                game:GetService("ReplicatedStorage").MysteryBox:InvokeServer("Unreal")
+                wait(0.001)
+            end
+        end)
     end
 })
 
-Section1:AddColor({
-    enabled = true,
-    text = "Color1",
-    tooltip = "tooltip1",
-    color = Color3.fromRGB(255, 255, 255),
-    flag = "Color_1",
-    trans = 0,
-    open = false,
+Section2:AddToggle({
+    text = "auto inferno boxes",
+    state = false,
+    risky = true,
+    tooltip = "tooltip3",
+    flag = "Toggle_3",
     risky = false,
     callback = function(v)
-        print(ValueText, v)
+      autoInfernoBox = v
+        spawn(function()
+            while autoInfernoBox do
+                game:GetService("ReplicatedStorage").MysteryBox:InvokeServer("Inferno")
+                wait(0.001)
+            end
+        end)
+    end
+})
+
+Section2:AddToggle({
+    text = "auto pulse",
+    state = false,
+    risky = true,
+    tooltip = "tooltip4",
+    flag = "Toggle_4",
+    risky = false,
+    callback = function(v)
+      autoPulse = v
+        spawn(function()
+            while autoPulse do
+                game:GetService("ReplicatedStorage").Pulse:FireServer()
+                wait(0.001)
+            end
+        end)
+    end
+})
+
+Section2:AddToggle({
+    text = "auto rebirth",
+    state = false,
+    risky = true,
+    tooltip = "tooltip5",
+    flag = "Toggle_5",
+    risky = false,
+    callback = function(v)
+      autoRebirth = v
+        spawn(function()
+            while autoRebirth do
+                game:GetService("ReplicatedStorage").Rebirth:InvokeServer(26)
+                wait(0.001)
+            end
+        end)
+    end
+})
+
+Section2:AddToggle({
+    text = "box teleportation",
+    state = false,
+    risky = true,
+    tooltip = "tooltip6",
+    flag = "Toggle_6",
+    risky = false,
+    callback = function(v)
+        autoTeleport = v -- Update toggle state
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if v then
+                teleportLoop()
+            end
+        end
     end
 })
 
