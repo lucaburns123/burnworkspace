@@ -42,7 +42,26 @@ Section1:AddButton({
     end
 })
 
+Section1:AddToggle({
+    text = "Toggle1",
+    state = false,
+    risky = true,
+    tooltip = "tooltip1",
+    flag = "Toggle_1",
+    risky = false,
+    callback = function(v)
+        autoTeleport = v -- Update toggle state
 
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if v then
+                teleportLoop()
+            end
+        end
+    end
+})
 
 Section1:AddToggle({
     text = "Toggle1",
@@ -52,7 +71,16 @@ Section1:AddToggle({
     flag = "Toggle_1",
     risky = false,
     callback = function(v)
-        print(ValueText, v)
+        autoTeleport = v -- Update toggle state
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if v then
+                teleportLoop()
+            end
+        end
     end
 }):AddBind({
     enabled = true,
