@@ -312,14 +312,56 @@ Section2:AddToggle({
 
 local Section1misc = Tab2:AddSection("teleports", 1)
 local Section2misc = Tab2:AddSection("attributes", 2)
+local Section3misc = Tab2:AddSection("quick menu", 3)
 
+Section1misc:AddButton({
+    enabled = true,
+    text = "base",
+    tooltip = "spawns player to base",
+    confirm = true,
+    risky = false,
+    callback = function()
+        main.toBase()
+    end
+})
 
+Section1misc:AddButton({
+    enabled = true,
+    text = "docks",
+    tooltip = "spawns player to docks",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(988,47,-19)
+    end
+})
 
+Section1misc:AddButton({
+    enabled = true,
+    text = "bridge",
+    tooltip = "spawns player to bridge",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-324,104,524)
+    end
+})
+
+Section1misc:AddButton({
+    enabled = true,
+    text = "leaderboard",
+    tooltip = "spawns player to leaderboard",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-67,179,328)
+    end
+})
 
 Section2misc:AddSlider({
     enabled = true,
-    text = " player walkspeed",
-    tooltip = "tooltip1",
+    text = " player walk speed",
+    tooltip = "attempts to modify the walk speed",
     flag = "Slider_1",
     suffix = "",
     dragging = true,
@@ -332,6 +374,48 @@ Section2misc:AddSlider({
             game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = v
     end
 })
+
+Section2misc:AddSlider({
+    enabled = true,
+    text = " player jump power",
+    tooltip = "attempts to modify the jump power",
+    flag = "Slider_1",
+    suffix = "",
+    dragging = true,
+    focused = false,
+    min = 0,
+    max = 100,
+    increment = 0.1,
+    risky = false,
+    callback = function(v)
+            game.Players.LocalPlayer.Character.Humanoid.JumpPower = v
+    end
+})
+
+Section3misc:AddButton({
+    enabled = true,
+    text = "open crate shop",
+    tooltip = "open's spookmcdook's shop (crate shop)",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.SpookMcDookShop.Visible = true;
+    end
+})
+
+Section3misc:AddButton({
+    enabled = true,
+    text = "open st. patty's shop",
+    tooltip = "open's st. patty's shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.SpookMcDookShop.Visible = true;
+    end
+})
+
+
+
 
 local Time = (string.format("%."..tostring(Decimals).."f", os.clock() - Clock))
 library:SendNotification(("Loaded In "..tostring(Time)), 6)
