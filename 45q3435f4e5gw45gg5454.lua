@@ -16,21 +16,22 @@ local Notif = library:InitNotifications()
 
 for i = 20,0,-1 do 
     task.wait(0.05)
-    local LoadingXSX = Notif:Notify("Loading library, please be patient. <3", 3, "information") -- notification, alert, error, success, information
+    local LoadingXSX = Notif:Notify("loading library, please be patient. <3", 3, "information") -- notification, alert, error, success, information
 end 
 
-library.title = "Vigil"
+library.title = "burn.script"
 
 library:Introduction()
 wait(1)
 local Init = library:Init()
 
-local Tab1 = Init:NewTab("Example tab")
+local Tab1 = Init:NewTab("lay-out")
 
-local Section1 = Tab1:NewSection("Example Components")
-
+local Section1 = Tab1:NewSection("layout switch")
 
 local Label1 = Tab1:NewLabel("Example label", "left")--"left", "center", "right"
+
+local Button1 = Button1:AddButton("text", function() end)
 
 local Toggle1 = Tab1:NewToggle("Example toggle", false, function(value)
     local vers = value and "on" or "off"
