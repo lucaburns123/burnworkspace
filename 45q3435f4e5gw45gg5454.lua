@@ -104,12 +104,11 @@ local Section1 = Tab1:AddSection("layout switch", 1)
 
 local Section2 = Tab1:AddSection("helpers", 2)
 
-local Section1misc = Tab1:AddSection("teleports", 3)
 
-local Section2misc = Tab1:AddSection("attributes", 4)
+local Section2misc = Tab1:AddSection("attributes", 1)
 
 
-Section4:AddSlider({
+Section2misc:AddSlider({
     enabled = true,
     text = " player walkspeed",
     tooltip = "tooltip1",
