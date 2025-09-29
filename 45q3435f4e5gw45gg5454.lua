@@ -39,16 +39,11 @@ Section1:AddButton({
     confirm = true,
     risky = false,
     callback = function()
-        print("Pressed!")
+        startLayoutLoop("Layout1", "runningLayout1")
     end
 })
 
-Callback = function(state)
-        _G.runningLayout1 = state
-        if state then
-            startLayoutLoop("Layout1", "runningLayout1")
-        end
-    end
+
 
 
 Section2:AddToggle({
