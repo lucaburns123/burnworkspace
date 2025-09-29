@@ -22,28 +22,8 @@ local SettingsTab = library:CreateSettingsTab(Window1)
 local Section1 = Tab1:AddSection("layout switch", 1)
 --Section1:SetText("Text")
 
-Section1:AddButton({
-    enabled = true,
+Section1:AddToggle({
     text = "box teleportation",
-    tooltip = "tooltip1",
-    confirm = true,
-    risky = false,
-    callback = function(state)
-        autoTeleport = state -- Update toggle state
-
-        local player = game.Players.LocalPlayer
-        local character = player.Character
-
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            if state then
-                teleportLoop()
-            end
-        end
-    end
-})
-
-Section1:AddToggle({
-    text = "Toggle1",
     state = false,
     risky = true,
     tooltip = "tooltip1",
@@ -64,23 +44,14 @@ Section1:AddToggle({
 })
 
 Section1:AddToggle({
-    text = "Toggle1",
+    text = "manual box teleportation",
     state = false,
     risky = true,
     tooltip = "tooltip1",
     flag = "Toggle_1",
     risky = false,
     callback = function(v)
-        autoTeleport = v -- Update toggle state
-
-        local player = game.Players.LocalPlayer
-        local character = player.Character
-
-        if character and character:FindFirstChild("HumanoidRootPart") then
-            if v then
-                teleportLoop()
-            end
-        end
+        print(ValueText, v)
     end
 }):AddBind({
     enabled = true,
@@ -97,7 +68,16 @@ Section1:AddToggle({
         print(ValueText, v)
     end,
     keycallback = function(v)
-        print(ValueText, v)
+        autoTeleport = v -- Update toggle state
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if v then
+                teleportLoop()
+            end
+        end
     end
 })
 
