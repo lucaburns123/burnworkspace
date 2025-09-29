@@ -104,8 +104,8 @@ local Section1 = Tab1:AddSection("layout switch", 1)
 
 local Section2 = Tab1:AddSection("helpers", 2)
 
-
-local Section2misc = Tab1:AddSection("attributes", 1)
+local Section1misc = Tab2:AddSection("teleports", 1)
+local Section2misc = Tab2:AddSection("attributes", 2)
 
 
 Section2misc:AddSlider({
