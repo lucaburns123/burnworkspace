@@ -34,33 +34,6 @@ Section1:AddButton({
     end
 })
 
-Section1:AddButton({
-    enabled = true,
-    text = "layout-2",
-    tooltip = "tooltip1",
-    confirm = true,
-    risky = false,
-    callback = function(state)
-        _G.runningLayout2 = state
-        if state then
-            startLayoutLoop("Layout2", "runningLayout2")
-        end
-    end
-})
-
-Section1:AddButton({
-    enabled = true,
-    text = "layout-3",
-    tooltip = "tooltip1",
-    confirm = true,
-    risky = false,
-    callback = function(state)
-        _G.runningLayout1 = state
-        if state then
-            startLayoutLoop("Layout1", "runningLayout1")
-        end
-    end
-})
 
 Section1:AddToggle({
     text = "box teleportation",
