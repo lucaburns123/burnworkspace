@@ -95,6 +95,7 @@ local Window1  = library.NewWindow({
 )})
 
 local Tab1 = Window1:AddTab("  main  ")
+local Tab2 = Window1:AddTab("  misc  ")
 local SettingsTab = library:CreateSettingsTab(Window1)
 
 --Tab1:SetText("Text")
@@ -102,6 +103,11 @@ local SettingsTab = library:CreateSettingsTab(Window1)
 local Section1 = Tab1:AddSection("layout switch", 1)
 
 local Section2 = Tab1:AddSection("helpers", 2)
+
+local Section1misc = Tab1:AddSection("teleports", 3)
+
+local Section2misc = Tab1:AddSection("attributes", 4)
+
 
 
 
