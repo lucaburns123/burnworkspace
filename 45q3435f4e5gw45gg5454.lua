@@ -414,6 +414,50 @@ Section3misc:AddButton({
     end
 })
 
+Section3misc:AddButton({
+    enabled = true,
+    text = "open masked man shop",
+    tooltip = "open's masked man's shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.MaskedManShop.Visible = true;
+    end
+})
+
+Section3misc:AddButton({
+    enabled = true,
+    text = "open masked man shop",
+    tooltip = "open's masked man's shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.TheMaskedManShop.Visible = true;
+    end
+})
+
+Section3misc:AddButton({
+    enabled = true,
+    text = "open masked man shop",
+    tooltip = "open's masked man's shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.TheMaskedMan.Visible = true;
+    end
+})
+
+Section3misc:AddButton({
+    enabled = true,
+    text = "open masked man shop",
+    tooltip = "open's masked man's shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        game.Players.LocalPlayer.PlayerGui.GUI.MaskedMan.Visible = true;
+    end
+})
+
 
 
 
