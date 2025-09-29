@@ -160,15 +160,7 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
 ]]
 -- DEFINITIONS
 
--- Layout Toggles
-function startLayoutLoop(layoutName, runningVariable)
-    spawn(function()
-        while _G[runningVariable] do
-            game:GetService("ReplicatedStorage").Layouts:InvokeServer("Load", layoutName)
-            wait(0.001)
-        end
-    end)
-end
+
 
 -- Teleport Loop Function
 function teleportLoop()
