@@ -61,30 +61,30 @@ end
 
 -- Dropdown for Auto Layout Switch Threshold
 local thresholdOptions = {
-    "1K (Thousand)", "1M (Million)", "1B (Billion)", "1T (Trillion)", "1qd (Quadrillion)", "1Qn (Quintillion)",
-    "1sx (Sextillion)", "1Sp (Septillion)", "1O (Octillion)", "1N (Nonillion)", "1de (Decillion)", "1Ud (Undecillion)",
-    "1DD (Duodecillion)", "1tdD (Tredecillion)", "1qdD (Quattuordecillion)", "1QnD (Quindecillion)", "1sxD (Sedecillion)", "1SpD (Septendecillion)"
+    "1K (thousand)", "1M (million)", "1B (billion)", "1T (trillion)", "1qd (quadrillion)", "1Qn (quintillion)",
+    "1sx (sextillion)", "1Sp (septillion)", "1O (octillion)", "1N (nonillion)", "1de (decillion)", "1Ud (undecillion)",
+    "1DD (duodecillion)", "1tdD (tredecillion)", "1qdD (quattuordecillion)", "1QnD (quindecillion)", "1sxD (sedecillion)", "1SpD (septendecillion)"
 }
 
 local thresholdValues = {
-    ["1K (Thousand)"] = 1e3,
-    ["1M (Million)"] = 1e6,
-    ["1B (Billion)"] = 1e9,
-    ["1T (Trillion)"] = 1e12,
-    ["1qd (Quadrillion)"] = 1e15,
-    ["1Qn (Quintillion)"] = 1e18,
-    ["1sx (Sextillion)"] = 1e21,
-    ["1Sp (Septillion)"] = 1e24,
-    ["1O (Octillion)"] = 1e27,
-    ["1N (Nonillion)"] = 1e30,
-    ["1de (Decillion)"] = 1e33,
-    ["1Ud (Undecillion)"] = 1e36,
-    ["1DD (Duodecillion)"] = 1e39,
-    ["1tdD (Tredecillion)"] = 1e42,
-    ["1qdD (Quattuordecillion)"] = 1e45,
-    ["1QnD (Quindecillion)"] = 1e48,
-    ["1sxD (Sedecillion)"] = 1e51,
-    ["1SpD (Septendecillion)"] = 1e54,
+    ["1K (thousand)"] = 1e3,
+    ["1M (million)"] = 1e6,
+    ["1B (billion)"] = 1e9,
+    ["1T (trillion)"] = 1e12,
+    ["1qd (quadrillion)"] = 1e15,
+    ["1Qn (quintillion)"] = 1e18,
+    ["1sx (sextillion)"] = 1e21,
+    ["1Sp (septillion)"] = 1e24,
+    ["1O (octillion)"] = 1e27,
+    ["1N (nonillion)"] = 1e30,
+    ["1de (decillion)"] = 1e33,
+    ["1Ud (undecillion)"] = 1e36,
+    ["1DD (duodecillion)"] = 1e39,
+    ["1tdD (tredecillion)"] = 1e42,
+    ["1qdD (quattuordecillion)"] = 1e45,
+    ["1QnD (quindecillion)"] = 1e48,
+    ["1sxD (sedecillion)"] = 1e51,
+    ["1SpD (septendecillion)"] = 1e54,
 }
 
 library:init()
@@ -94,7 +94,7 @@ local Window1  = library.NewWindow({
     size = UDim2.new(0, 510, 0.6, 6
 )})
 
-local Tab1 = Window1:AddTab("  layout  ")
+local Tab1 = Window1:AddTab("  main  ")
 local SettingsTab = library:CreateSettingsTab(Window1)
 
 --Tab1:SetText("Text")
@@ -162,7 +162,7 @@ end
 
 Section1:AddButton({
     enabled = true,
-    text = "layout 1",
+    text = "layout 1 (broken)",
     tooltip = "forcibly switches your layout to layout 1",
     confirm = true,
     risky = false,
@@ -173,7 +173,7 @@ Section1:AddButton({
 
 Section1:AddButton({
     enabled = true,
-    text = "layout 2",
+    text = "layout 2 (broken)",
     tooltip = "forcibly switches your layout to layout 2",
     confirm = true,
     risky = false,
@@ -184,7 +184,7 @@ Section1:AddButton({
 
 Section1:AddButton({
     enabled = true,
-    text = "layout 3",
+    text = "layout 3 (broken)",
     tooltip = "forcibly switches your layout to layout 3",
     confirm = true,
     risky = false,
