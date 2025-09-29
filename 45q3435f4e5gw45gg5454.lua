@@ -19,14 +19,31 @@ local SettingsTab = library:CreateSettingsTab(Window1)
 
 --Tab1:SetText("Text")
 
-local Section1 = Tab1:AddSection("layout-helpers", 1)
-
+local Section1 = Tab1:AddSection("layout switch", 1)
 --Section1:SetText("Text")
 
+Section1:AddButton({
+    enabled = true,
+    text = "box teleportation",
+    tooltip = "tooltip1",
+    confirm = true,
+    risky = false,
+    callback = function(state)
+        autoTeleport = state -- Update toggle state
 
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if state then
+                teleportLoop()
+            end
+        end
+    end
+})
 
 Section1:AddToggle({
-    text = "box teleportation",
+    text = "Toggle1",
     state = false,
     risky = true,
     tooltip = "tooltip1",
@@ -46,6 +63,55 @@ Section1:AddToggle({
     end
 })
 
+Section1:AddToggle({
+    text = "Toggle1",
+    state = false,
+    risky = true,
+    tooltip = "tooltip1",
+    flag = "Toggle_1",
+    risky = false,
+    callback = function(v)
+        autoTeleport = v -- Update toggle state
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character
+
+        if character and character:FindFirstChild("HumanoidRootPart") then
+            if v then
+                teleportLoop()
+            end
+        end
+    end
+}):AddBind({
+    enabled = true,
+    text = "Keybind1",
+    tooltip = "tooltip1",
+    mode = "toggle",
+    bind = "None",
+    flag = "ToggleKey_1",
+    state = false,
+    nomouse = false,
+    risky = false,
+    noindicator = false,
+    callback = function(v)
+        print(ValueText, v)
+    end,
+    keycallback = function(v)
+        print(ValueText, v)
+    end
+})
+
+Section1:AddBox({
+    enabled = true,
+    name = "TextBox1",
+    flag = "TextBox_1",
+    input = "PlaceHolder1",
+    focused = false,
+    risky = false,
+    callback = function(v)
+        print(ValueText, v)
+    end
+})
 
 --[[Section1:AddToggle({
     text = "Toggle1",
@@ -158,9 +224,6 @@ library:SendNotification(("Loaded In "..tostring(Time)), 6)
     library:LoadConfig(Default)
     library:SaveConfig(Default)
 ]]
--- DEFINITIONS
-
-
 
 -- Teleport Loop Function
 function teleportLoop()
