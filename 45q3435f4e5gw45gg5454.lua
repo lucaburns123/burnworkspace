@@ -24,7 +24,6 @@ end
 
 -- Perfomance boost (gets rid of textures) -vex
 local function optimizeGame()
--- Remove textures from all parts
 for _, obj in pairs(workspace:GetDescendants()) do
     if obj:IsA("Texture") or obj:IsA("Decal") then
         obj:Destroy()
