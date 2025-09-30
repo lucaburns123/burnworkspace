@@ -202,7 +202,16 @@ Section1:AddButton({
 })
 
 
-
+Section2:AddButton({
+    enabled = true,
+    text = "auto free daily crate",
+    tooltip = "auto-obtains daily crate from the shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.GUI.SpookMcDookShop.RedeemFrame.MouseButton1Click)
+    end
+})
 
 Section2:AddToggle({
     text = "auto regular boxes",
@@ -429,7 +438,7 @@ Section3misc:AddButton({
     confirm = true,
     risky = false,
     callback = function()
-        game:GetService("Players").LocalPlayer.PlayerGui.GUI.Craftsman.Visible  = true;
+        game.Players.LocalPlayer.PlayerGui.GUI.Craftsman.Visible  = true;
     end
 })
 
