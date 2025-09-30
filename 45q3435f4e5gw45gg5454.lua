@@ -471,30 +471,31 @@ Section4misc:AddButton({
     confirm = true,
     risky = false,
     callback = function()
-
-        -- Remove Player Clothing  
-        for _, player in pairs(Players:GetPlayers()) do  
-            if player.Character then  
-                for _, obj in pairs(player.Character:GetChildren()) do  
-                    if obj:IsA("Shirt") or obj:IsA("Pants") or obj:IsA("Accessory") then  
-                        obj:Destroy()  
-                    end  
-                end  
-            end  
-        end  
-        
-        -- Remove Lighting Effects and Make Sky Black  
-        Lighting.GlobalShadows = false  
-        Lighting.FogEnd = 9e9  
-        Lighting.Brightness = 0  
-        Lighting.TimeOfDay = "00:00:00"  
-        if Lighting:FindFirstChildOfClass("Sky") then  
-            Lighting:FindFirstChildOfClass("Sky"):Destroy()  
-        end  
-        
-        
-        optimizeGame()
-          
+                -- Made by RIP#6666
+        _G.Settings = {
+            Players = {
+                ["Ignore Me"] = true, -- Ignore your Character
+                ["Ignore Others"] = true -- Ignore other Characters
+            },
+            Meshes = {
+                Destroy = false, -- Destroy Meshes
+                LowDetail = true -- Low detail meshes (NOT SURE IT DOES ANYTHING)
+            },
+            Images = {
+                Invisible = true, -- Invisible Images
+                LowDetail = false, -- Low detail images (NOT SURE IT DOES ANYTHING)
+                Destroy = false, -- Destroy Images
+            },
+            ["No Particles"] = true, -- Disables all ParticleEmitter, Trail, Smoke, Fire and Sparkles
+            ["No Camera Effects"] = true, -- Disables all PostEffect's (Camera/Lighting Effects)
+            ["No Explosions"] = true, -- Makes Explosion's invisible
+            ["No Clothes"] = true, -- Removes Clothing from the game
+            ["Low Water Graphics"] = true, -- Removes Water Quality
+            ["No Shadows"] = true, -- Remove Shadows
+            ["Low Rendering"] = true, -- Lower Rendering
+            ["Low Quality Parts"] = true -- Lower quality parts
+        }
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
     end
 })
 
