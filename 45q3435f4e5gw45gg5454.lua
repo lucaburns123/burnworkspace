@@ -492,6 +492,9 @@ Lighting.TimeOfDay = "00:00:00"
 if Lighting:FindFirstChildOfClass("Sky") then  
     Lighting:FindFirstChildOfClass("Sky"):Destroy()  
 end  
+
+
+optimizeGame()
           
     end
 })
