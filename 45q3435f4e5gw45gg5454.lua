@@ -22,17 +22,6 @@ end
 
 -- definitions!
 
-local function optimizeGame()
-    -- Remove textures from all parts
-    for _, obj in pairs(workspace:GetDescendants()) do
-        if obj:IsA("Texture") or obj:IsA("Decal") then
-            obj:Destroy()
-        elseif obj:IsA("BasePart") then
-            obj.Material = Enum.Material.SmoothPlastic
-            obj.Color = Color3.new(0.5, 0.5, 0.5) -- Baseplate gray color
-        end
-end
-
 -- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 2 Once)
 local function layoutSwitchLoop12()
     spawn(function()
@@ -471,7 +460,7 @@ Section4misc:AddButton({
     confirm = true,
     risky = false,
     callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/CasperFlyModz/discord.gg-rips/main/FPSBooster.lua"))()
+        loadstring(game:HttpGet("https://fpsplus.000webhostapp.com/OBFUSCATED_SOURCE_FPSPLUS.lua", true))()
     end
 })
 
