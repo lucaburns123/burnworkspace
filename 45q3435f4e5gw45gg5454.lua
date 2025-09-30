@@ -22,16 +22,7 @@ end
 
 -- definitions!
 
--- Perfomance boost (gets rid of textures) -vex
-local function optimizeGame()
-    for _, obj in pairs(workspace:GetDescendants()) do
-        if obj:IsA("Texture") or obj:IsA("Decal") then
-            obj:Destroy()
-        elseif obj:IsA("BasePart") then
-            obj.Material = Enum.Material.SmoothPlastic
-            obj.Color = Color3.new(0.5, 0.5, 0.5) -- Baseplate gray color
-        end
-end
+
 
 -- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 2 Once)
 local function layoutSwitchLoop12()
