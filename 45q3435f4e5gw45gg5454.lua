@@ -1,3 +1,8 @@
+-- burnscript! | v1.193 | miners haven
+
+-- definitions!
+
+
 local Decimals = 4
 local Clock = os.clock()
 local ValueText = "Value Is Now :"
@@ -16,6 +21,18 @@ local function loadLayout(layoutName)
 end
 
 -- definitions!
+
+-- Perfomance boost (gets rid of textures) -vex
+local function optimizeGame()
+-- Remove textures from all parts
+for _, obj in pairs(workspace:GetDescendants()) do
+    if obj:IsA("Texture") or obj:IsA("Decal") then
+        obj:Destroy()
+    elseif obj:IsA("BasePart") then
+        obj.Material = Enum.Material.SmoothPlastic
+        obj.Color = Color3.new(0.5, 0.5, 0.5) -- Baseplate gray color
+    end
+end
 
 -- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 2 Once)
 local function layoutSwitchLoop12()
@@ -195,7 +212,16 @@ Section1:AddButton({
 })
 
 
-
+Section2:AddButton({
+    enabled = true,
+    text = "auto free daily crate",
+    tooltip = "auto-obtains daily crate from the shop",
+    confirm = true,
+    risky = false,
+    callback = function()
+        firesignal(game:GetService("Players").LocalPlayer.PlayerGui.GUI.SpookMcDookShop.RedeemFrame.MouseButton1Click)
+    end
+})
 
 Section2:AddToggle({
     text = "auto regular boxes",
@@ -313,6 +339,7 @@ Section2:AddToggle({
 local Section1misc = Tab2:AddSection("teleports", 1)
 local Section2misc = Tab2:AddSection("attributes", 2)
 local Section3misc = Tab2:AddSection("quick menu", 3)
+local Section4misc = Tab2:AddSection("exploits", 4)
 
 Section1misc:AddButton({
     enabled = true,
@@ -406,7 +433,7 @@ Section3misc:AddButton({
 Section3misc:AddButton({
     enabled = true,
     text = "open st. patty's shop",
-    tooltip = "open's st. patty's shop",
+    tooltip = "open's st. patty's shop (not avaliable currently.)",
     confirm = true,
     risky = false,
     callback = function()
@@ -416,49 +443,58 @@ Section3misc:AddButton({
 
 Section3misc:AddButton({
     enabled = true,
-    text = "open masked man shop",
+    text = "open craftsman shop",
     tooltip = "open's masked man's shop",
     confirm = true,
     risky = false,
     callback = function()
-        game.Players.LocalPlayer.PlayerGui.GUI.MaskedManShop.Visible = true;
+        game:GetService("Players").LocalPlayer.PlayerGui.GUI.Craftsman.Visible  = true;
     end
 })
 
-Section3misc:AddButton({
+Section4misc:AddButton({
     enabled = true,
-    text = "open masked man shop",
-    tooltip = "open's masked man's shop",
+    text = "anti afk",
+    tooltip = "attempts to keep the user's connected at all times",
     confirm = true,
     risky = false,
     callback = function()
-        game.Players.LocalPlayer.PlayerGui.GUI.TheMaskedManShop.Visible = true;
+        for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.Idled)) do
+        v:Disable()
+        end
     end
 })
 
-Section3misc:AddButton({
+Section4misc:AddButton({
     enabled = true,
-    text = "open masked man shop",
-    tooltip = "open's masked man's shop",
+    text = "performance boost",
+    tooltip = "attempts to boost perfomance in various ways",
     confirm = true,
     risky = false,
     callback = function()
-        game.Players.LocalPlayer.PlayerGui.GUI.TheMaskedMan.Visible = true;
+
+-- Remove Player Clothing  
+for _, player in pairs(Players:GetPlayers()) do  
+    if player.Character then  
+        for _, obj in pairs(player.Character:GetChildren()) do  
+            if obj:IsA("Shirt") or obj:IsA("Pants") or obj:IsA("Accessory") then  
+                obj:Destroy()  
+            end  
+        end  
+    end  
+end  
+
+-- Remove Lighting Effects and Make Sky Black  
+Lighting.GlobalShadows = false  
+Lighting.FogEnd = 9e9  
+Lighting.Brightness = 0  
+Lighting.TimeOfDay = "00:00:00"  
+if Lighting:FindFirstChildOfClass("Sky") then  
+    Lighting:FindFirstChildOfClass("Sky"):Destroy()  
+end  
+          
     end
 })
-
-Section3misc:AddButton({
-    enabled = true,
-    text = "open masked man shop",
-    tooltip = "open's masked man's shop",
-    confirm = true,
-    risky = false,
-    callback = function()
-        game.Players.LocalPlayer.PlayerGui.GUI.MaskedMan.Visible = true;
-    end
-})
-
-
 
 
 local Time = (string.format("%."..tostring(Decimals).."f", os.clock() - Clock))
