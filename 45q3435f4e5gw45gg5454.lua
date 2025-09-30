@@ -23,14 +23,14 @@ end
 -- definitions!
 
 local function optimizeGame()
--- Remove textures from all parts
-for _, obj in pairs(workspace:GetDescendants()) do
-if obj:IsA("Texture") or obj:IsA("Decal") then
-obj:Destroy()
-elseif obj:IsA("BasePart") then
-obj.Material = Enum.Material.SmoothPlastic
-obj.Color = Color3.new(0.5, 0.5, 0.5) -- Baseplate gray color
-end
+    -- Remove textures from all parts
+    for _, obj in pairs(workspace:GetDescendants()) do
+        if obj:IsA("Texture") or obj:IsA("Decal") then
+            obj:Destroy()
+        elseif obj:IsA("BasePart") then
+            obj.Material = Enum.Material.SmoothPlastic
+            obj.Color = Color3.new(0.5, 0.5, 0.5) -- Baseplate gray color
+        end
 end
 
 -- Auto Layout Switching Loop (Loops Layout 1, Loads Layout 2 Once)
@@ -472,28 +472,28 @@ Section4misc:AddButton({
     risky = false,
     callback = function()
 
--- Remove Player Clothing  
-for _, player in pairs(Players:GetPlayers()) do  
-    if player.Character then  
-        for _, obj in pairs(player.Character:GetChildren()) do  
-            if obj:IsA("Shirt") or obj:IsA("Pants") or obj:IsA("Accessory") then  
-                obj:Destroy()  
+        -- Remove Player Clothing  
+        for _, player in pairs(Players:GetPlayers()) do  
+            if player.Character then  
+                for _, obj in pairs(player.Character:GetChildren()) do  
+                    if obj:IsA("Shirt") or obj:IsA("Pants") or obj:IsA("Accessory") then  
+                        obj:Destroy()  
+                    end  
+                end  
             end  
         end  
-    end  
-end  
-
--- Remove Lighting Effects and Make Sky Black  
-Lighting.GlobalShadows = false  
-Lighting.FogEnd = 9e9  
-Lighting.Brightness = 0  
-Lighting.TimeOfDay = "00:00:00"  
-if Lighting:FindFirstChildOfClass("Sky") then  
-    Lighting:FindFirstChildOfClass("Sky"):Destroy()  
-end  
-
-
-optimizeGame()
+        
+        -- Remove Lighting Effects and Make Sky Black  
+        Lighting.GlobalShadows = false  
+        Lighting.FogEnd = 9e9  
+        Lighting.Brightness = 0  
+        Lighting.TimeOfDay = "00:00:00"  
+        if Lighting:FindFirstChildOfClass("Sky") then  
+            Lighting:FindFirstChildOfClass("Sky"):Destroy()  
+        end  
+        
+        
+        optimizeGame()
           
     end
 })
