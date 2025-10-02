@@ -302,6 +302,24 @@ Section2:AddToggle({
 })
 
 Section2:AddToggle({
+    text = "auto remote",
+    state = false,
+    risky = true,
+    tooltip = "auto-activate's remote/drop button",
+    flag = "Toggle_5",
+    risky = false,
+    callback = function(v)
+       autoRemote = v
+        spawn(function()
+            while autoRemote do
+                game:GetService("ReplicatedStorage").RemoteDrop:FireServer()
+                wait(0.001)
+            end
+        end)
+    end
+})
+
+Section2:AddToggle({
     text = "box teleportation",
     state = false,
     risky = true,
