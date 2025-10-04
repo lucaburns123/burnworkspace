@@ -4700,12 +4700,12 @@ function library:init()
 end
 
 function library:CreateSettingsTab(menu)
-    local settingsTab = menu:AddTab('  Settings  ', 999);
-    local configSection = settingsTab:AddSection('Config', 1);
-    local mainSection = settingsTab:AddSection('Main', 1);
+    local settingsTab = menu:AddTab('  settings  ', 999);
+    local configSection = settingsTab:AddSection('config', 1);
+    local mainSection = settingsTab:AddSection('main', 1);
 
-    configSection:AddBox({text = 'Config Name', flag = 'configinput'})
-    configSection:AddList({text = 'Config', flag = 'selectedconfig'})
+    configSection:AddBox({text = 'config name', flag = 'configinput'})
+    configSection:AddList({text = 'config', flag = 'selectedconfig'})
 
     local function refreshConfigs()
         library.options.selectedconfig:ClearValues();
@@ -4717,20 +4717,20 @@ function library:CreateSettingsTab(menu)
         end
     end
 
-    configSection:AddButton({text = 'Load', confirm = true, callback = function()
+    configSection:AddButton({text = 'load', confirm = true, callback = function()
         library:LoadConfig(library.flags.selectedconfig);
-    end}):AddButton({text = 'Save', confirm = true, callback = function()
+    end}):AddButton({text = 'save', confirm = true, callback = function()
         library:SaveConfig(library.flags.selectedconfig);
     end})
 
-    configSection:AddButton({text = 'Create', confirm = true, callback = function()
+    configSection:AddButton({text = 'create', confirm = true, callback = function()
         if library:GetConfig(library.flags.configinput) then
-            library:SendNotification('Config \''..library.flags.configinput..'\' already exists.', 5, c3new(1,0,0));
+            library:SendNotification('config \''..library.flags.configinput..'\' already exists.', 5, c3new(1,0,0));
             return
         end
         writefile(self.cheatname..'/'..self.gamename..'/configs/'..library.flags.configinput.. self.fileext, http:JSONEncode({}));
         refreshConfigs()
-    end}):AddButton({text = 'Delete', confirm = true, callback = function()
+    end}):AddButton({text = 'delete', confirm = true, callback = function()
         if library:GetConfig(library.flags.selectedconfig) then
             delfile(self.cheatname..'/'..self.gamename..'/configs/'..library.flags.selectedconfig.. self.fileext);
             refreshConfigs()
@@ -4739,11 +4739,11 @@ function library:CreateSettingsTab(menu)
 
     refreshConfigs()
 
-    mainSection:AddBind({text = 'Open / Close', flag = 'togglebind', nomouse = true, noindicator = true, bind = Enum.KeyCode.End, callback = function()
+    mainSection:AddBind({text = 'open / close', flag = 'togglebind', nomouse = true, noindicator = true, bind = Enum.KeyCode.End, callback = function()
         library:SetOpen(not library.open)
     end});
 
-    mainSection:AddButton({text = 'Join Discord', flag = 'joindiscord', confirm = true, callback = function()
+    mainSection:AddButton({text = 'join discord', flag = 'joindiscord', confirm = true, callback = function()
         local res = syn.request({
             Url = 'https://discord.gg/rkRW5VrbWu',
             Method = 'POST',
@@ -4758,23 +4758,23 @@ function library:CreateSettingsTab(menu)
             })
         })
         if res.Success then
-            library:SendNotification(library.cheatname..' | Joined Discord', 3);
+            library:SendNotification(library.cheatname..' | joined discord', 3);
         end
     end})
 
-    mainSection:AddButton({text = 'Rejoin Server', confirm = true, callback = function()
+    mainSection:AddButton({text = 'rejoin server', confirm = true, callback = function()
         game:GetService("TeleportService"):TeleportToPlaceInstance(game.PlaceId, game.JobId);
     end})
 
-    mainSection:AddButton({text = 'Rejoin Game', confirm = true, callback = function()
+    mainSection:AddButton({text = 'rejoin game', confirm = true, callback = function()
         game:GetService("TeleportService"):Teleport(game.PlaceId);
     end})
 
-    mainSection:AddButton({text = 'Copy Join Script', callback = function()
+    mainSection:AddButton({text = 'copy join script', callback = function()
         setclipboard(([[game:GetService("TeleportService"):TeleportToPlaceInstance(%s, "%s")]]):format(game.PlaceId, game.JobId))
     end})
 
-    mainSection:AddButton({text = "Unload", confirm = true,
+    mainSection:AddButton({text = "unload", confirm = true,
        callback = function(bool)
            if bool then
                library:Unload() 
@@ -4783,47 +4783,8 @@ function library:CreateSettingsTab(menu)
            end
        end})
 
-    mainSection:AddSeparator({text = 'Indicators'});
+    
 
-    mainSection:AddToggle({text = 'Watermark', flag = 'watermark_enabled', state = true,});
-
-    mainSection:AddSlider({text = 'Custom X', flag = 'watermark_x', suffix = '%', min = 0, max = 100, increment = .1, value = 6});
-    mainSection:AddSlider({text = 'Custom Y', flag = 'watermark_y', suffix = '%', min = 0, max = 100, increment = .1, value = 1});
-
-    mainSection:AddToggle({text = 'Keybinds', flag = 'keybind_indicator', state = true, callback = function(bool)
-        library.keyIndicator:SetEnabled(bool);
-    end})
-    mainSection:AddSlider({text = 'Position X', flag = 'keybind_indicator_x', min = 0, max = 100, increment = .1, value = .5, callback = function()
-        library.keyIndicator:SetPosition(newUDim2(library.flags.keybind_indicator_x / 100, 0, library.flags.keybind_indicator_y / 100, 0));    
-    end});
-    mainSection:AddSlider({text = 'Position Y', flag = 'keybind_indicator_y', min = 0, max = 100, increment = .1, value = 30, callback = function()
-        library.keyIndicator:SetPosition(newUDim2(library.flags.keybind_indicator_x / 100, 0, library.flags.keybind_indicator_y / 100, 0));    
-    end});
-
-
-
-    local themeStrings = {"Custom"};
-    for _,v in next, library.themes do
-        table.insert(themeStrings, v.name)
-    end
-    local themeSection = settingsTab:AddSection('Custom Theme', 2);
-    local setByPreset = false
-themeSection:AddList({text = 'Presets', flag = 'preset_theme', values = themeStrings, callback = function(newTheme)
-        if newTheme == "Custom" then return end
-        setByPreset = true
-        for _,v in next, library.themes do
-            if v.name == newTheme then
-                for x, d in pairs(library.options) do
-                    if v.theme[tostring(x)] ~= nil then
-                        d:SetColor(v.theme[tostring(x)])
-                    end
-                end
-                library:SetTheme(v.theme)
-                break
-            end
-        end
-        setByPreset = false
-    end}):Select('Default');
 
     for i, v in pairs(library.theme) do
         themeSection:AddColor({text = i, flag = i, color = library.theme[i], callback = function(c3)
